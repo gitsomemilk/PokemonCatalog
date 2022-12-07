@@ -12,13 +12,14 @@ function Pokemon({endpoint}) {
             try {
                 const {data} = await axios.get(endpoint);
                 setpokemon(data);
+                console.log(data);
             } catch (e) {
                 console.error(e)
             }
         }
 
         fetchData();
-    },[endpoint]);
+    },[]);
 
     return (
         <section className="poke-card">
@@ -31,7 +32,17 @@ function Pokemon({endpoint}) {
                     />
                     <p><strong>Moves: </strong>{pokemon.moves.length}</p>
                     <p><strong>Weight: </strong>{pokemon.weight}</p>
+                    <p><strong>Type:</strong></p>
+                    <ul>
+                        {pokemon.types.map((type) => {
+                            return(
+                                <li key={`${type.type.name}`}>{type.type.name}</li>
+                            )
+                        })}
+                    </ul>
+
                     <p><strong>Abilities: </strong></p>
+
                     <ul>
                         {pokemon.abilities.map((ability) => {
                             return (
@@ -41,6 +52,7 @@ function Pokemon({endpoint}) {
                             )
                         })}
                     </ul>
+
                 </>
             }
         </section>

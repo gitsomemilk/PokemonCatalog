@@ -4,6 +4,7 @@ import axios from "axios";
 import logo from './assets/International_Pokémon_logo.svg.png'
 import Button from './components/Button/Button'
 import Pokemon from "./components/Pokemon/pokemon";
+import Searchbar from "./components/Searchbar/Searchbar";
 
 function App() {
     const [pokemons, setPokemons] = useState([]);
@@ -34,19 +35,21 @@ function App() {
             <>
             <img src={logo} alt="logo" width="400px"/>
             <section className="button-bar">
-                <Button
-                disabled={!pokemons.next}
-                clickHandler={()=> setEndpoint(pokemons.next)}
 
-                >Meer Pokémons
-                </Button>
                 <Button
                     disabled={!pokemons.previous}
                     clickHandler={() => setEndpoint(pokemons.previous)}
                 >
                     Vorige Pokémons
                 </Button>
+                <Button
+                    disabled={!pokemons.next}
+                    clickHandler={()=> setEndpoint(pokemons.next)}
+
+                >Meer Pokémons
+                </Button>
             </section>
+
                 {pokemons.results && pokemons.results.map((pokemon) => {
                     return <Pokemon key={pokemon.name} endpoint={pokemon.url} />
                 })}
